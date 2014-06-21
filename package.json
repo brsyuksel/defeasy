@@ -1,0 +1,25 @@
+{
+	"name": "defeasy",
+	"version": "0.0.1",
+	"description": "defeasy helps you define data and accessor property easily",
+	"keywords": [
+		"property", "data-property", "accessor-property", "getter", "setter",
+		"writable", "enumerable", "configurable"
+	],
+	"homepage": "http://github.com/brsyuksel/defeasy.git",
+	"license": "GPL-3.0",
+	"author": "Baris Yuksel <brsyuksel@gmail.com> (http://brsyuksel.com)",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/brsyuksel/defeasy.git"
+	},
+	"main": "defeasy.js",
+	"dependencies": {},
+	"devDependencies": {
+		"coffee-script": "latest",
+		"mocha": "latest"
+	},
+	"scripts": {
+		"test": "./node_modules/mocha/bin/mocha"
+	}
+}
