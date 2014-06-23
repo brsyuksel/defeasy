@@ -11,20 +11,24 @@
 ```javascript
 var defeasy = require('defeasy');
 
-opt = defeasy(UserDefinedClass.prototype);
+opt = defeasy.Defeasy(UserDefinedClass.prototype);
 ```
 
 or 
 
 ```javascript
-var defeasy = require('defeasy')(); // defined at Object.prototype
+var defeasy = require('defeasy').Defeasy(); // defined at Object.prototype
 ```
 
 now, you can call defeasy function for initialization. defeasy function has basic usage:
 
-**defeasy( [target=Object.prototype [, writable=false [, enumerable=true [,configurable=false]]]] );** 
+**Defeasy( [target=Object.prototype [, writable=false [, enumerable=true [,configurable=false]]]] );** 
 
 defeasy function defines methods listed at methods section to target and returns an object such as contains option constants.
++ **target**: define defeasy methods at this prototype or instance
++ **writable**: writable value for defeasy methods descriptor
++ **enumerable**: enumerable value for defeasy methods descriptor
++ **configurable**: configurable value for defeasy methods descriptor
 
 ### defeasy methods
 
@@ -44,7 +48,7 @@ defeasy function defines methods listed at methods section to target and returns
 	* defeasy.OTHERS_UNDEFINED: it just for accessor-property. if property is already defined and you want to define a new setter(getter) function for it, you can write over getter(setter) as undefined with this option.
 
 ```javascript
-var defeasy = require('defeasy')(UserDefined.prototype);
+var defeasy = require('defeasy').Defeasy(UserDefined.prototype);
 var userdf = new UserDefined();
 
 // data-property

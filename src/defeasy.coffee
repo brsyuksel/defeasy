@@ -13,6 +13,7 @@ class DefeasyOptions
 		@USE_PROTO = 0x8
 		@OTHERS_UNDEFINED = 0x10
 defy = new DefeasyOptions
+Object.freeze defy
 
 class Descriptor
 	constructor: (enumerable, configurable) ->
@@ -109,10 +110,10 @@ class DefeasyPrototype
 			@[aliases[key] || key] = new DataDescriptor dfn, writable, \
 			enumerable, configurable
 
+module.exports =
+	Defeasy: (t=Object.prototype, a={}, w=no, e=yes, c=no) ->
+		properties = new DefeasyPrototype a, w, e, c
+		Object.defineProperties t, properties
 
-module.exports = (t = Object.prototype, a={}, w=no, e=yes, c=no) ->
-	properties = new DefeasyPrototype a, w, e, c
-	Object.defineProperties t, properties
-
-	Object.freeze defy
-	defy
+		defy
+	DefeasyOptions: defy

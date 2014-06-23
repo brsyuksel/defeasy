@@ -9,15 +9,19 @@ describe 'defeasy', ->
 	]
 
 	describe 'defeasing', ->
+		it 'module should have defeasyoptions', ->
+			options = Defeasy.DefeasyOptions
+			assert.ok !!options
+
 		it 'defeasy should return an object', ->
 			class DefeasyTest
-			defeasy = Defeasy DefeasyTest.prototype
+			defeasy = Defeasy.Defeasy DefeasyTest.prototype
 			assert.ok !!defeasy
 			assert.ok Object.isFrozen defeasy
 
 		it 'prototype should have defeasy methods as non-c and non-w', ->
 			class DefeasyTest2
-			defeasy = Defeasy DefeasyTest2.prototype
+			defeasy = Defeasy.Defeasy DefeasyTest2.prototype
 			res = methods.every (e, i, a) ->
 				desc = Object.getOwnPropertyDescriptor DefeasyTest2.prototype, e
 				!desc.writable and !desc.configurable
@@ -26,7 +30,7 @@ describe 'defeasy', ->
 
 		it 'prototype should have defeasy methods as configurable and writable', ->
 			class DefeasyTest3
-			defeasy = Defeasy DefeasyTest3.prototype, {}, yes, yes, yes
+			defeasy = Defeasy.Defeasy DefeasyTest3.prototype, {}, yes, yes, yes
 			res = methods.every (e, i, a) ->
 				desc = Object.getOwnPropertyDescriptor DefeasyTest3.prototype, e
 				desc.writable and desc.configurable
@@ -35,7 +39,7 @@ describe 'defeasy', ->
 
 		it 'prototype should have read_only method when setted alias for readOnly', ->
 			class DefeasyTest3a
-			defeasy = Defeasy DefeasyTest3a.prototype, {'readOnly':'read_only'}
+			defeasy = Defeasy.Defeasy DefeasyTest3a.prototype, {'readOnly':'read_only'}
 			assert.ok DefeasyTest3a.prototype.hasOwnProperty 'read_only'
 
 	describe 'instance', ->
@@ -43,7 +47,7 @@ describe 'defeasy', ->
 			class DefeasyTest4
 				constructor: ->
 					@x = 1
-			defeasy = Defeasy DefeasyTest4.prototype, {}, yes, yes, yes
+			defeasy = Defeasy.Defeasy DefeasyTest4.prototype, {}, yes, yes, yes
 			x = new DefeasyTest4
 
 			assert.ifError not Object.isExtensible(x) or Object.isSealed(x) or Object.isFrozen(x)
@@ -61,7 +65,7 @@ describe 'defeasy', ->
 		class DefeasyTest5
 			constructor: ->
 				@x = 1
-		defeasy = Defeasy DefeasyTest5.prototype
+		defeasy = Defeasy.Defeasy DefeasyTest5.prototype
 		x = new DefeasyTest5
 
 		it '(non-)writable, (non-)enumerable, (non-)configurable', ->
