@@ -1,4 +1,4 @@
-# defeasy
+# defeasy [![Build Status](https://travis-ci.org/brsyuksel/defeasy.svg?branch=master)](https://travis-ci.org/brsyuksel/defeasy)
 
 `defeasy` is a small library. it helps you define data and accessor properties. 
 
