@@ -1,6 +1,6 @@
 {
 	"name": "defeasy",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "defeasy helps you define data and accessor property easily",
 	"keywords": [
 		"property", "data-property", "accessor-property", "getter", "setter",

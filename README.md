@@ -11,28 +11,29 @@
 ```javascript
 var defeasy = require('defeasy');
 
-opt = defeasy.Defeasy(UserDefinedClass.prototype);
+defeasy(UserDefinedClass.prototype);
 ```
 
 or 
 
 ```javascript
-var defeasy = require('defeasy').Defeasy(); // defined at Object.prototype
+var defeasy = require('defeasy')(); // defined at Object.prototype
 ```
 
 now, you can call defeasy function for initialization. defeasy function has basic usage:
 
-**Defeasy( [target=Object.prototype [, writable=false [, enumerable=true [,configurable=false]]]] );** 
+**defeasy( [target=Object.prototype [, aliases={} [, writable=false [, enumerable=true [,configurable=false]]]]] );** 
 
-defeasy function defines methods listed at methods section to target and returns an object such as contains option constants.
+defeasy function defines methods listed at methods section to target and it has some properties that you can use them as option parameter at defeasy methods.
 + **target**: define defeasy methods at this prototype or instance
++ **aliases**: rename defeasy functions(ex: {'readOnly':'read_only'})
 + **writable**: writable value for defeasy methods descriptor
 + **enumerable**: enumerable value for defeasy methods descriptor
 + **configurable**: configurable value for defeasy methods descriptor
 
 ### defeasy methods
 
-#### instance.defeasy(prop, value [, value1], option)
+#### instance.defeasy(prop, value [, value1], option=defeasy.NONE)
 
 + **prop**: name of property. must be string.
 + **value**: for data-property, it must be javascript data: number, string, date, function etc. if you want to define a accessor-property ( getter, setter functions for a key ), you must call this method with two parameters such as they are functions.
@@ -42,13 +43,13 @@ defeasy function defines methods listed at methods section to target and returns
 	* defeasy.CONFIGURABLE: define property as configurable
 	* defeasy.READ_ONLY: define as enumerable, not writable and not configurable
 	* defeasy.READ_WRITE: define as writable and configurable. _(= defeasy.WRITABLE | defeasy.CONFIGURABLE)_
-	* defeasy.DEFAULT (defeasy.ALL): defined as like by assigning, all attributes are true
-	* defeasy.NONE: all attributes are false.
+	* defeasy.DEFAULT (defeasy.ALL, defeasy.DEFAULT_ASSIGN): defined as like by assigning, all attributes are true
+	* defeasy.NONE (defeasy.DEFAULT_DEFINE): all attributes are false.
 	* defeasy.USE_PROTO: define property at prototype of instance.
 	* defeasy.OTHERS_UNDEFINED: it just for accessor-property. if property is already defined and you want to define a new setter(getter) function for it, you can write over getter(setter) as undefined with this option.
 
 ```javascript
-var defeasy = require('defeasy').Defeasy(UserDefined.prototype);
+var defeasy = require('defeasy')(UserDefined.prototype);
 var userdf = new UserDefined();
 
 // data-property
@@ -71,7 +72,7 @@ defines property as not writable and not configurable.
 
 defines property as writable and configurable
 
-#### instance.accessor(prop, getter, setter [, option=defeasy.ENUMERABLE|defeasy.CONFIGURABLE])
+#### instance.accessor(prop, getter, setter [, option=defeasy.NONE])
 
 defines a accessor-property. getter and setter parameters must be function. if you want to define a new getter/setter for already defined accessor-property, you can set as undefined it's setter/getter via passing undefined argument and using defeasy.OTHERS_UNDEFINED
 
